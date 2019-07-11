@@ -1,5 +1,5 @@
 //	Библиотека для вывода текста и графики на OLED дисплеи: http://iarduino.ru/shop/Displei/ekran-0-96-128x64-oled-i2c-belyy.html
-//  Версия: 1.0.1
+//  Версия: 1.0.3
 //  Последнюю версию библиотеки Вы можете скачать по ссылке: http://iarduino.ru/file/340.html
 //  Для вывода только текста (без графики) воспользуйтесь библиотекой «iarduino_OLED_txt»: http://iarduino.ru/file/341.html
 //  Подробное описание функции бибилиотеки доступно по ссылке: http://wiki.iarduino.ru/page/OLED_trema/
