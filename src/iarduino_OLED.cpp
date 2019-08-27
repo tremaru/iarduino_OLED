@@ -350,10 +350,9 @@ void	iarduino_OLED::_sendCommand(uint8_t command){																	//	Парам
 																														//
 //		Отправка указанного количества байтов данных:																	//	Возвращаемое значение: отсутствует.
 void	iarduino_OLED::_sendData(uint8_t* data, uint8_t sum){															//	Параметры: указатель на начало массива данных, количество передаваемых байт
-			if(objI2C->getType()==4){
-				uint8_t i=0, j=0; 
-				while(i<sum){j=sum-i; if(j>24){j=24;}	objI2C->writeBytes(dispAddr, SSD1306_DATA, &data[i],j); i+=24;}	//	Отправляем адрес dispAddr с битом rw=0 (запись), SSD1306_DATA и sum байт из массива data.
-			}else{										objI2C->writeBytes(dispAddr, SSD1306_DATA, data, sum);}			//	Отправляем адрес dispAddr с битом rw=0 (запись), SSD1306_DATA и sum байт из массива data.
+			if(objI2C->getType()==4){																					//	Если передача данных осуществляется под управлением библиотеки Wire.h, то ...
+			for(uint8_t i=0; i<sum; i+=30){objI2C->writeBytes(dispAddr,SSD1306_DATA,&data[i],((i+30)<sum)?30:(sum-i));}}//	Передаём данные многобайтным пакетом, но не более 30 байт в одном пакете (ограничение буфера Wire.h)
+			else                          {objI2C->writeBytes(dispAddr,SSD1306_DATA, data, sum);}						//	Передаём данные многобайтным пакетом не задумываясь о его размере.
 }																														//
 																														//
 //		Отправка буфера (массива arrBuffer) в дисплей:																	//	Возвращаемое значение: отсутствует.
