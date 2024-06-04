@@ -1,5 +1,5 @@
 //	Библиотека для вывода текста и графики на OLED дисплеи: http://iarduino.ru/shop/Displei/ekran-0-96-128x64-oled-i2c-belyy.html
-//  Версия: 1.2.2
+//  Версия: 1.2.3
 //  Последнюю версию библиотеки Вы можете скачать по ссылке: http://iarduino.ru/file/340.html
 //  Для вывода только текста (без графики) воспользуйтесь библиотекой «iarduino_OLED_txt»: http://iarduino.ru/file/341.html
 //  Подробное описание функции бибилиотеки доступно по ссылке: http://wiki.iarduino.ru/page/OLED_trema/
@@ -100,10 +100,10 @@ class iarduino_OLED{																									//
 		}																												//
 	/**	Пользовательские функции **/																					//
 		#if defined(TwoWire_h) || defined(__ARDUINO_WIRE_IMPLEMENTATION__)												//
-		void				begin			(TwoWire* i=&Wire ){ selI2C->begin(i); _begin(); }							//	Определяем функцию инициализации модуля								(Параметр:  объект для работы с аппаратной шиной I2C).
+		void				begin			(TwoWire* i=&Wire ){ selI2C->init(i); _begin(); }							//	Определяем функцию инициализации модуля								(Параметр:  объект для работы с аппаратной шиной I2C).
 		#endif																											//
 		#if defined(iarduino_I2C_Software_h)																			//
-		void				begin			(SoftTwoWire* i   ){ selI2C->begin(i); _begin(); }							//	Определяем функцию инициализации модуля								(Параметр:  объект для работы с программной шиной I2C).
+		void				begin			(SoftTwoWire* i   ){ selI2C->init(i); _begin(); }							//	Определяем функцию инициализации модуля								(Параметр:  объект для работы с программной шиной I2C).
 		#endif																											//
 		void				clrScr			(bool=false																);	//	Объявляем  функцию очистки дисплея						(Параметр:  флаг закрашивания экрана в белый цвет)
 		void				fillScr			(bool i=true	){	clrScr(i);											}	//	Определяем функцию заливки дисплея						(Параметр:  флаг закрашивания экрана в белый цвет)
