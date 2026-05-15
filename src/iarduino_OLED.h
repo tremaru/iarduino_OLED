@@ -1,5 +1,5 @@
 //	Библиотека для вывода текста и графики на OLED дисплеи: http://iarduino.ru/shop/Displei/ekran-0-96-128x64-oled-i2c-belyy.html
-//  Версия: 1.2.3
+//  Версия: 1.2.5
 //  Последнюю версию библиотеки Вы можете скачать по ссылке: http://iarduino.ru/file/340.html
 //  Для вывода только текста (без графики) воспользуйтесь библиотекой «iarduino_OLED_txt»: http://iarduino.ru/file/341.html
 //  Подробное описание функции бибилиотеки доступно по ссылке: http://wiki.iarduino.ru/page/OLED_trema/
@@ -99,7 +99,7 @@ class iarduino_OLED{																									//
 							selI2C		=	new iarduino_I2C_Select;													//	Переопределяем указатель selI2C на объект производного класса iarduino_I2C_Select.
 		}																												//
 	/**	Пользовательские функции **/																					//
-		#if defined(TwoWire_h) || defined(__ARDUINO_WIRE_IMPLEMENTATION__)												//
+		#if defined(TwoWire_h) || defined(__ARDUINO_WIRE_IMPLEMENTATION__) || defined(__AVR_ATmega328__) || defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega1284P__) || defined(__AVR_ATmega2560__) || defined(ESP8266) || defined(ESP32) || defined(ARDUINO_ARCH_RP2040) || defined(RENESAS_CORTEX_M4) // Если подключена библиотека Wire или платы её поддерживают...
 		void				begin			(TwoWire* i=&Wire ){ selI2C->init(i); _begin(); }							//	Определяем функцию инициализации модуля								(Параметр:  объект для работы с аппаратной шиной I2C).
 		#endif																											//
 		#if defined(iarduino_I2C_Software_h)																			//
@@ -118,17 +118,18 @@ class iarduino_OLED{																									//
 		void				setCursor		(					int=OLED_N, int=OLED_N								);	//	Объявляем  функцию установки курсора					(Параметры:        № колонки, № строки)
 		void				setCursorShift	(					int x=0   , int y=0	){	numX+=x;numY+=y;			}	//	Определяем функцию сдвига курсора						(Параметры:        № колонки, № строки)
 #ifdef RENESAS_CORTEX_M4																								//
-		void				print			(int            ,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода чисел							(Параметры: число, № колонки, № строки, система счисления)
-		void				print			(unsigned int   ,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода чисел							(Параметры: число, № колонки, № строки, система счисления)
+		void				print			(int            ,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода числа							(Параметры: число, № колонки, № строки, система счисления)
+		void				print			(unsigned int   ,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода числа							(Параметры: число, № колонки, № строки, система счисления)
 #else																													//
-		void				print			(int8_t			,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода чисел							(Параметры: число, № колонки, № строки, система счисления)
-		void				print			(uint8_t		,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода чисел							(Параметры: число, № колонки, № строки, система счисления)
-		void				print			(int16_t		,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода чисел							(Параметры: число, № колонки, № строки, система счисления)
-		void				print			(uint16_t		,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода чисел							(Параметры: число, № колонки, № строки, система счисления)
+		void				print			(int8_t			,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода числа							(Параметры: число, № колонки, № строки, система счисления)
+		void				print			(uint8_t		,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода числа							(Параметры: число, № колонки, № строки, система счисления)
+		void				print			(int16_t		,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода числа							(Параметры: число, № колонки, № строки, система счисления)
+		void				print			(uint16_t		,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода числа							(Параметры: число, № колонки, № строки, система счисления)
 #endif																													//
-		void				print			(int32_t		,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода чисел							(Параметры: число, № колонки, № строки, система счисления)
-		void				print			(uint32_t		,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода чисел							(Параметры: число, № колонки, № строки, система счисления)
-		void				print			(double			,	int=OLED_N, int=OLED_N, int=2						);	//	Объявляем  функцию вывода чисел							(Параметры: число, № колонки, № строки, количество знаков после запятой)
+		void				print			(int32_t		,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода числа							(Параметры: число, № колонки, № строки, система счисления)
+		void				print			(uint32_t		,	int=OLED_N, int=OLED_N, int=DEC						);	//	Объявляем  функцию вывода числа							(Параметры: число, № колонки, № строки, система счисления)
+		void				print			(double			,	int=OLED_N, int=OLED_N, int=2						);	//	Объявляем  функцию вывода числа							(Параметры: число, № колонки, № строки, количество знаков после запятой)
+		void				print			(char			,	int=OLED_N,	int=OLED_N								);	//	Объявляем  функцию вывода символа						(Параметры: символ,№ колонки, № строки)
 		void				print			(char*			,	int=OLED_N, int=OLED_N								);	//	Объявляем  функцию вывода текста						(Параметры: текст, № колонки, № строки)
 		void				print			(const char*	,	int=OLED_N, int=OLED_N								);	//	Объявляем  функцию вывода текста						(Параметры: текст, № колонки, № строки)
 		void				print			(String			,	int=OLED_N, int=OLED_N								);	//	Объявляем  функцию вывода текста						(Параметры: текст, № колонки, № строки)

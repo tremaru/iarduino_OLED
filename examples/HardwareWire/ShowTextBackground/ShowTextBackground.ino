@@ -8,7 +8,7 @@
                                                                        //
 #include <Wire.h>                                                      // Подключаем библиотеку для работы с аппаратной шиной I2C, до подключения библиотеки iarduino_OLED.
 #include <iarduino_OLED.h>                                             // Подключаем библиотеку iarduino_OLED.
-iarduino_OLED myOLED(0x3C);                                            // Объявляем объект myOLED, указывая адрес дисплея на шине I2C: 0x3C или 0x3D.
+iarduino_OLED myOLED(0x3C);                                            // Создаём объект myOLED, указывая адрес дисплея на шине I2C: 0x3C или 0x3D.
                                                                        //
 void setup(){                                                          //
      myOLED.begin(&Wire); // &Wire1, &Wire2 ...                        // Инициируем работу с дисплеем, указав ссылку на объект для работы с шиной I2C на которой находится дисплей (по умолчанию &Wire).
