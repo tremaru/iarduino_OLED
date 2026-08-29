@@ -1,5 +1,5 @@
 //	Библиотека для вывода текста и графики на OLED дисплеи: http://iarduino.ru/shop/Displei/ekran-0-96-128x64-oled-i2c-belyy.html
-//  Версия: 1.2.5
+//  Версия: 1.2.6
 //  Последнюю версию библиотеки Вы можете скачать по ссылке: http://iarduino.ru/file/340.html
 //  Для вывода только текста (без графики) воспользуйтесь библиотекой «iarduino_OLED_txt»: http://iarduino.ru/file/341.html
 //  Подробное описание функции бибилиотеки доступно по ссылке: http://wiki.iarduino.ru/page/OLED_trema/
@@ -22,7 +22,7 @@
 #include	"DefaultImage.h"																							//	Подключаем файл DefaultImage.h - хранящий изображения.
 #include	"iarduino_OLED_I2C.h"																						//	Подключаем библиотеку выбора реализации шины I2C.
 																														//
-#if defined(TwoWire_h) || defined(__ARDUINO_WIRE_IMPLEMENTATION__) || defined(__AVR_ATmega328__) || defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega1284P__) || defined(__AVR_ATmega2560__) || defined(ESP8266) || defined(ESP32) || defined(ARDUINO_ARCH_RP2040) || defined(RENESAS_CORTEX_M4) // Если подключена библиотека Wire или платы её поддерживают...
+#if defined(TwoWire_h) || defined(__ARDUINO_WIRE_IMPLEMENTATION__) || defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__) || defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega1284P__) || defined(__AVR_ATmega2560__) || defined(ESP8266) || defined(ESP32) || defined(ARDUINO_ARCH_RP2040) || defined(RENESAS_CORTEX_M4) // Если подключена библиотека Wire.h или платы её поддерживают...
 #include	<Wire.h>																									//	Разрешаем использовать библиотеку Wire в данной библиотеке.
 #endif																													//
 #if defined( iarduino_I2C_Software_h )																					//	Если библиотека iarduino_I2C_Software подключена в скетче...
@@ -99,7 +99,7 @@ class iarduino_OLED{																									//
 							selI2C		=	new iarduino_I2C_Select;													//	Переопределяем указатель selI2C на объект производного класса iarduino_I2C_Select.
 		}																												//
 	/**	Пользовательские функции **/																					//
-		#if defined(TwoWire_h) || defined(__ARDUINO_WIRE_IMPLEMENTATION__) || defined(__AVR_ATmega328__) || defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega1284P__) || defined(__AVR_ATmega2560__) || defined(ESP8266) || defined(ESP32) || defined(ARDUINO_ARCH_RP2040) || defined(RENESAS_CORTEX_M4) // Если подключена библиотека Wire или платы её поддерживают...
+		#if defined(TwoWire_h) || defined(__ARDUINO_WIRE_IMPLEMENTATION__) || defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__) || defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega1284P__) || defined(__AVR_ATmega2560__) || defined(ESP8266) || defined(ESP32) || defined(ARDUINO_ARCH_RP2040) || defined(RENESAS_CORTEX_M4) // Если подключена библиотека Wire.h или платы её поддерживают...
 		void				begin			(TwoWire* i=&Wire ){ selI2C->init(i); _begin(); }							//	Определяем функцию инициализации модуля								(Параметр:  объект для работы с аппаратной шиной I2C).
 		#endif																											//
 		#if defined(iarduino_I2C_Software_h)																			//
